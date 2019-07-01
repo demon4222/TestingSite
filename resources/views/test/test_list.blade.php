@@ -7,7 +7,7 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header text-center"><h4>Список доступных тестов</h4></div>
+            <div class="card-header text-center"><h4>Список всех тестов</h4></div>
             <div class="card-body">
                 <ul>
                     @foreach($tests as $test)
