@@ -20,8 +20,8 @@ class CreateQuestionsTable extends Migration
             $table->integer('test_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('test_id')->references('id')->on('tests');
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
         });
     }
 

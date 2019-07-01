@@ -12,12 +12,15 @@ class AnswerTypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('types')->insert([
+            'id' => 1,
             'name' => 'Один вариант ответа'
         ]);
         DB::table('types')->insert([
+            'id' => 2,
             'name' => 'Много вариантов ответа'
         ]);
         DB::table('types')->insert([
+            'id' => 3,
             'name' => 'Текстовый ответ'
         ]);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Test;
+use App\Models\Test;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -14,7 +14,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        $tests = Test::paginate(15);
+
+        return view('test.test_list', compact('tests'));
     }
 
     /**
