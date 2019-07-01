@@ -15,16 +15,16 @@ class CreateUserAnswersTable extends Migration
     {
         Schema::create('user_answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('answer_id')->unsigned()->default(null);
+            $table->integer('answer_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('question_id')->unsigned();
-            $table->string('value')->default(null);
+            $table->string('value')->nullable();
             $table->boolean('isCorrect');
             $table->timestamps();
 
-            $table->foreign('answer_id')->references('id')->on('answers');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

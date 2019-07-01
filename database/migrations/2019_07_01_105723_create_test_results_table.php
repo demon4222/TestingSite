@@ -20,8 +20,8 @@ class CreateTestResultsTable extends Migration
             $table->float('result');
             $table->timestamps();
 
-            $table->foreign('test_id')->references('id')->on('tests');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
