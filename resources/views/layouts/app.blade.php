@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @stack('scripts')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -38,7 +39,7 @@
                 <ul class="navbar-nav mr-auto">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="/test">Список тестов</a>
+                            <a class="nav-link" href="{{action('Admin\TestController@index')}}">Список тестов</a>
                         </li>
                     @endauth
                 </ul>

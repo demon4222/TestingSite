@@ -19,8 +19,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/test', 'TestController@index');
+Route::group(['middleware'=>'auth', 'namespace' => 'Admin'],function (){
+    Route::resource('tests', 'TestController');
+    Route::resource('questions', 'QuestionController', [
+        'except' => ['create', 'store']
+    ]);
+    Route::resource('answers','AnswerController',[
+       'except' => ['store']
+    ]);
+    Route::get('/questions/create/{test}', 'QuestionController@create');
+    Route::post('/questions/store/{test}','QuestionController@store');
 
-Route::group(['middleware'=>'auth'],function (){
-    Route::get('/test/{test}', 'TestController@show');
+    Route::post('/answers/store/{question}', 'AnswerController@store');
+
 });
