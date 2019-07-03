@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Test;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TestController extends Controller
 {
@@ -14,9 +15,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        $tests = Test::paginate(15);
+        $tests = Test::orderBy('id','desc')->paginate(10);
 
-        return view('test.test_list', compact('tests'));
+        return view('admin.test.index', compact('tests'));
     }
 
     /**
@@ -26,7 +27,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.test.create');
     }
 
     /**
@@ -37,7 +38,9 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Test::create($request->only('name'));
+
+        return redirect(action('Admin\TestController@index'))->with('message', 'Тест создан');
     }
 
     /**
@@ -59,7 +62,7 @@ class TestController extends Controller
      */
     public function edit(Test $test)
     {
-        //
+        return view('admin.test.edit', compact('test'));
     }
 
     /**
@@ -71,7 +74,10 @@ class TestController extends Controller
      */
     public function update(Request $request, Test $test)
     {
-        //
+        $test->name = $request->name;
+        $test->save();
+
+        return redirect()->back()->with('message','Успешно!');
     }
 
     /**
@@ -82,6 +88,8 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
-        //
+        $test->delete();
+
+        return redirect()->back();
     }
 }
